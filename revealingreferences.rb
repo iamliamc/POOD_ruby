@@ -4,8 +4,15 @@ class RevealingReferences
     @wheels = wheelify(data)
   end
 
+  # Separating iteration from the action that’s being performed on each element is a common case of multiple responsibility that is easy to recognize.
+
+  def diameter(wheel)
+    wheel.rim + (wheel.tire * 2)
+  end
+
   def diameters
-    wheels.collect {|wheel| wheel.rim + (wheel.tire * 2)}
+    wheels.collect {|wheel|
+      diameter(wheel)}
   end
 
   #... What were once references to cell[1] have been transformed into message sends to wheel.tire.
