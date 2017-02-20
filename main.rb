@@ -26,3 +26,11 @@ Gear.new(
 
 # Chapter 4
   # Desired 'message' network --> Each reveals as little about itself, and knows as little about others, as possible.
+
+  # Design experts notice domain objects (classes with data and behavior that are likely to be represented in DB) without concentrating on them;
+  # they focus not on these objects but on the messages that pass between them.
+  # Planning! Objects and the messages needed to satisfy this use case.
+
+  # PRO --> The previous design emphasis was on classes and who and what they knew.
+  # Suddenly, the conversation has changed; it is now revolving around mes- sages. Instead of deciding on a class and then figuring out its responsibilities, you are now deciding on a message and figuring out where to send it.
+  # This transition from class-based design to message-based design is a turning point in your design career. “I need to send this message, who should respond to it?”
