@@ -34,3 +34,19 @@ Gear.new(
   # PRO --> The previous design emphasis was on classes and who and what they knew.
   # Suddenly, the conversation has changed; it is now revolving around mes- sages. Instead of deciding on a class and then figuring out its responsibilities, you are now deciding on a message and figuring out where to send it.
   # This transition from class-based design to message-based design is a turning point in your design career. “I need to send this message, who should respond to it?”
+
+
+  # Chapter 5
+  # Duck typed objects are chameleons that are defined more by their behavior than by their class.
+  # It’s not what an object is that matters, it’s what it does.
+  # Therefore: duck types, have public interfaces that represent a contract that must be explicit and well-documented.
+
+  # Concrete code is easy to understand but costly to extend.
+  # Abstract code may initially seem more obscure but, once understood, is far easier to change.
+  # KEY: When you use polymorphism it’s up to you to make sure all of your objects are well-behaved.
+  # 
+
+  # Duck typing smells
+  # 1) Case statements that siwtch on class
+  # 2) kind_of? or is_a?
+  # 3) responds_to?
