@@ -44,9 +44,13 @@ Gear.new(
   # Concrete code is easy to understand but costly to extend.
   # Abstract code may initially seem more obscure but, once understood, is far easier to change.
   # KEY: When you use polymorphism it’s up to you to make sure all of your objects are well-behaved.
-  # 
+  #
 
   # Duck typing smells
   # 1) Case statements that siwtch on class
   # 2) kind_of? or is_a?
   # 3) responds_to?
+
+  # Chapter 6
+  # Inheritance is, at its core, a mechanism for automatic message delegation. It defines a forwarding path for not-understood messages.
+  # This is the exact problem that inheritance solves; that of highly related types that share common behavior but differ along some dimension.
