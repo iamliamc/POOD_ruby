@@ -82,4 +82,6 @@ Gear.new(
   # This next example explores the idea of creating a fake object, or test double, to play the Diameterizable role.
   # When the interface of a role changes, all players of the role must adopt the new interface.
   # No where in the code defines these roles... except the tests if you remain consistent
+  # Test outgoing messages with mocks that expect calls
+  # Create tests that verify the interface for duck typed roles
   # page 226 END
