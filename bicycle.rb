@@ -1,45 +1,29 @@
 require 'date'
 require './schedule'
+require './parts'
+
 class Bicycle
   include Schedulable
   attr_reader :size, :chain, :tire_size, :schedule
 
   def initialize(args={})
     @size       = args[:size]
-    @chain      = args[:chain]      || default_chain
-    @tire_size  = args[:tire_size]  || default_tire_size
+    @parts      = args[:parts]
     @schedule   = args[:schedule]   || Schedule.new
 
     post_initialize(args)
-  end
-
-  def lead_days
-    1
   end
 
   def post_initialize(args)
     nil
   end
 
-  def local_spares
-    {}
-  end
-
-  def default_chain
-    '10-speed'
-  end
-
-  def default_tire_size
-    # raise NotImplementedError,
-    #   "This #{self.class} cannot respond to:"
-    '24'
+  def lead_days
+    1
   end
 
   def spares
-    {
-      chain:      chain,
-      tire_size:  tire_size
-    }.merge(local_spares)
+    parts.spares
   end
 end
 
@@ -60,34 +44,34 @@ end
 class RoadBike < Bicycle
   attr_reader :tape_color
 
-  def post_initialize(args)
-    @tape_color = args[:tape_color]
-  end
-
-  def local_spares
-    {tape_color: tape_color}
-  end
-
-  def default_tire_size
-    '23'
-  end
+  # def post_initialize(args)
+  #   @tape_color = args[:tape_color]
+  # end
+  #
+  # def local_spares
+  #   {tape_color: tape_color}
+  # end
+  #
+  # def default_tire_size
+  #   '23'
+  # end
 end
 
 class MountainBike < Bicycle
   attr_reader :front_shock, :rear_shock
 
-  def post_initialize(args)
-    @front_shock = args[:front_shock]
-    @rear_shock = args[:rear_shock]
-  end
-
-  def local_spares
-    {rear_shock: rear_shock}
-  end
-
-  def default_tire_size
-    '2.1'
-  end
+  # def post_initialize(args)
+  #   @front_shock = args[:front_shock]
+  #   @rear_shock = args[:rear_shock]
+  # end
+  #
+  # def local_spares
+  #   {rear_shock: rear_shock}
+  # end
+  #
+  # def default_tire_size
+  #   '2.1'
+  # end
 end
 
 class RecumbentBike < Bicycle
@@ -110,18 +94,22 @@ class RecumbentBike < Bicycle
   end
 end
 
-starting  = Date.parse("2015/09/04")
-ending    = Date.parse("2015/09/10")
 
-b = Bicycle.new
-p b.inspect
-p b.schedulable?(starting, ending)
+road_bike = Bicycle.new(size: 'L', parts: RoadBikeParts.new(tape_color: 'red'))
+p road_bike.size
 
-v = Vehicle.new
-p v.schedulable?(starting, ending)
-
-m = Mechanic.new
-p m.schedulable?(starting, ending)
+# starting  = Date.parse("2015/09/04")
+# ending    = Date.parse("2015/09/10")
+#
+# b = Bicycle.new
+# p b.inspect
+# p b.schedulable?(starting, ending)
+#
+# v = Vehicle.new
+# p v.schedulable?(starting, ending)
+#
+# m = Mechanic.new
+# p m.schedulable?(starting, ending)
 
 # bent = RecumbentBike.new(flag: 'tall and orange')
 #
