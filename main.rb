@@ -59,3 +59,8 @@ Gear.new(
   # inheritors to contribute these specializations without being forced to send super. Hook methods allow subclasses
   # to contribute specializations without knowing the abstract algorithm. They remove the need for subclasses to send super
   # and therefore reduce the coupling between layers of the hierarchy and increase its tolerance for change.
+
+  # Chapter 7
+  # When objects that play a common role need to share behavior, they do so via a Ruby module.
+  # The code defined in a module can be added to any object, be it an instance of a class, a class itself, or another module.
+  # This contract is defined by the Liskov Substitution Principle, which in mathematical terms says that a subtype should be substitutable for its supertype, and in Ruby terms this means that an object should act like what it claims to be.
