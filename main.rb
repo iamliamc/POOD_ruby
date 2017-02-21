@@ -64,3 +64,22 @@ Gear.new(
   # When objects that play a common role need to share behavior, they do so via a Ruby module.
   # The code defined in a module can be added to any object, be it an instance of a class, a class itself, or another module.
   # This contract is defined by the Liskov Substitution Principle, which in mathematical terms says that a subtype should be substitutable for its supertype, and in Ruby terms this means that an object should act like what it claims to be.
+
+  # Chapter 8
+  # Use Inheritance for is-a Relationships
+  # Small sets of real-world objects that fall naturally into static, transpar- ently obvious specialization hierarchies are candidates to be modeled using classical inheritance.
+  # Duck Types for 'behaves-like-a' Relationships
+  # Some problems require many different objects to play a common role. In addition to their core responsibilities, objects might play roles like schedulable, preparable, printable, or persistable.
+  # Composition for 'has-a' relationships
+
+  # Chapter 9
+  # Remember that you will forget; write tests that remind you of the story once you have.
+  # When your tests depend on interfaces you can refactor the underlying code with reckless abandon.
+  # Tests are your record of the interface of every abstraction and as such they are the wall at your back.
+  # write loosely coupled tests about only the things that matter
+  # tests you write should be for messages that are defined in public interfaces
+
+  # This next example explores the idea of creating a fake object, or test double, to play the Diameterizable role.
+  # When the interface of a role changes, all players of the role must adopt the new interface.
+  # No where in the code defines these roles... except the tests if you remain consistent
+  # page 226 END
