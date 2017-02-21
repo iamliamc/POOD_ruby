@@ -1,6 +1,7 @@
 require 'date'
 require './schedule'
 require './parts'
+require './partsfactory'
 
 class Bicycle
   include Schedulable
@@ -94,27 +95,48 @@ class RecumbentBike < Bicycle
   end
 end
 
-chain           = Part.new(name: 'chain', description: '10-speed')
-road_tire       = Part.new(name: 'tire_size', description: '23')
-tape            = Part.new(name: 'tape_color', description: 'red')
-mountain_tire   = Part.new(name: 'tire_size', description: '2.1')
-rear_shock      = Part.new(name: 'rear_shock', description: 'Fox')
-front_shock     = Part.new(name: 'front_shock', description: 'Manitou', needs_spare: false)
+road_config =
+[
+  ['chain',       '10-speed'],
+  ['tire_size',   '23'],
+  ['tape_color', 'red']
+]
 
-road_bike_parts = Parts.new([chain, road_tire, tape])
+mountain_config =
+[
+  ['chain',       '10-speed'],
+  ['tire_size',   '2.1'],
+  ['front_shock', 'Manitou', false],
+  ['rear_shock', 'Fox']
+]
 
-road_bike = Bicycle.new(size: 'L', parts: road_bike_parts)
-p road_bike.size
+road_parts = PartsFactory.build(road_config)
+p road_parts.inspect
 
-p road_bike.spares
+mountain_parts = PartsFactory.build(mountain_config)
+p mountain_parts.inspect
 
-mountain_bike_parts = Parts.new([chain, mountain_tire, front_shock, rear_shock])
-
-mountain_bike = Bicycle.new(size: 'M', parts: mountain_bike_parts)
-p mountain_bike.size
-
-p mountain_bike.parts.size
-p mountain_bike.spares.size
+# chain           = Part.new(name: 'chain', description: '10-speed')
+# road_tire       = Part.new(name: 'tire_size', description: '23')
+# tape            = Part.new(name: 'tape_color', description: 'red')
+# mountain_tire   = Part.new(name: 'tire_size', description: '2.1')
+# rear_shock      = Part.new(name: 'rear_shock', description: 'Fox')
+# front_shock     = Part.new(name: 'front_shock', description: 'Manitou', needs_spare: false)
+#
+# road_bike_parts = Parts.new([chain, road_tire, tape])
+#
+# road_bike = Bicycle.new(size: 'L', parts: road_bike_parts)
+# p road_bike.size
+#
+# p road_bike.spares
+#
+# mountain_bike_parts = Parts.new([chain, mountain_tire, front_shock, rear_shock])
+#
+# mountain_bike = Bicycle.new(size: 'M', parts: mountain_bike_parts)
+# p mountain_bike.size
+#
+# p mountain_bike.parts.size
+# p mountain_bike.spares.size
 
 
 # road_bike = Bicycle.new(size: 'L', parts: RoadBikeParts.new(tape_color: 'red'))
