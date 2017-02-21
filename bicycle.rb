@@ -1,12 +1,27 @@
+require 'date'
+require './schedule'
 class Bicycle
-  attr_reader :size, :chain, :tire_size
+  attr_reader :size, :chain, :tire_size, :schedule
 
   def initialize(args={})
     @size       = args[:size]
     @chain      = args[:chain]      || default_chain
     @tire_size  = args[:tire_size]  || default_tire_size
+    @schedule   = args[:schedule]   || Schedule.new
 
     post_initialize(args)
+  end
+
+  def schedulable?(start_date, end_date)
+    !scheduled?(start_date - lead_days, end_date)
+  end
+
+  def scheduled?(start_date, end_date)
+    schedule.scheduled?(self, start_date, end_date)
+  end
+
+  def lead_days
+    1
   end
 
   def post_initialize(args)
@@ -22,8 +37,9 @@ class Bicycle
   end
 
   def default_tire_size
-    raise NotImplementedError,
-      "This #{self.class} cannot respond to:"
+    # raise NotImplementedError,
+    #   "This #{self.class} cannot respond to:"
+    '24'
   end
 
   def spares
@@ -32,6 +48,8 @@ class Bicycle
       tire_size:  tire_size
     }.merge(local_spares)
   end
+
+
 end
 
 class RoadBike < Bicycle
@@ -87,26 +105,34 @@ class RecumbentBike < Bicycle
   end
 end
 
-bent = RecumbentBike.new(flag: 'tall and orange')
+starting  = Date.parse("2015/09/04")
+ending    = Date.parse("2015/09/10")
 
-p bent.spares
+b = Bicycle.new
+p b.inspect
+p b.schedulable?(starting, ending)
 
-road_bike = RoadBike.new(
-  size: 'M',
-  tape_color: 'red'
-)
 
-p road_bike.tire_size
-p road_bike.chain
-p road_bike.inspect
-
-mountain_bike = MountainBike.new(
-  size: 'S',
-  front_shock: 'Manitou',
-  rear_shock: 'Fox'
-)
-
-p mountain_bike.tire_size
-p mountain_bike.chain
-p mountain_bike.rear_shock
-p mountain_bike.inspect
+# bent = RecumbentBike.new(flag: 'tall and orange')
+#
+# p bent.spares
+#
+# road_bike = RoadBike.new(
+#   size: 'M',
+#   tape_color: 'red'
+# )
+#
+# p road_bike.tire_size
+# p road_bike.chain
+# p road_bike.inspect
+#
+# mountain_bike = MountainBike.new(
+#   size: 'S',
+#   front_shock: 'Manitou',
+#   rear_shock: 'Fox'
+# )
+#
+# p mountain_bike.tire_size
+# p mountain_bike.chain
+# p mountain_bike.rear_shock
+# p mountain_bike.inspect

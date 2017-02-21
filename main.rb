@@ -13,9 +13,6 @@ Gear.new(
   :cog => 11,
   :wheel => Wheel.new(26, 1.5)).gear_inches
 
-
-
-
 # NOTES
 
 # Chapter 3 Key Takeaway --- Depend on things that change less often than you do
@@ -54,3 +51,11 @@ Gear.new(
   # Chapter 6
   # Inheritance is, at its core, a mechanism for automatic message delegation. It defines a forwarding path for not-understood messages.
   # This is the exact problem that inheritance solves; that of highly related types that share common behavior but differ along some dimension.
+  # The general rule for refactoring into a new inheritance hierarchy is to arrange code so that you can promote abstractions rather than demote concretions.
+  # The best way to create an abstract superclass is by pushing code up from concrete subclasses.
+
+  # Definition of Hook Method:
+  # Abstract superclasses use the template method pattern to invite inheritors to supply specializations, and use hook methods to allow these
+  # inheritors to contribute these specializations without being forced to send super. Hook methods allow subclasses
+  # to contribute specializations without knowing the abstract algorithm. They remove the need for subclasses to send super
+  # and therefore reduce the coupling between layers of the hierarchy and increase its tolerance for change.
