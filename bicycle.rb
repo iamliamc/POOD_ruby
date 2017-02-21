@@ -113,7 +113,8 @@ mountain_bike_parts = Parts.new([chain, mountain_tire, front_shock, rear_shock])
 mountain_bike = Bicycle.new(size: 'M', parts: mountain_bike_parts)
 p mountain_bike.size
 
-p mountain_bike.spares
+p mountain_bike.parts.size
+p mountain_bike.spares.size
 
 
 # road_bike = Bicycle.new(size: 'L', parts: RoadBikeParts.new(tape_color: 'red'))
