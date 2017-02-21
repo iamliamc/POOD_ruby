@@ -1,6 +1,7 @@
 require 'date'
 require './schedule'
 class Bicycle
+  include Schedulable
   attr_reader :size, :chain, :tire_size, :schedule
 
   def initialize(args={})
@@ -10,14 +11,6 @@ class Bicycle
     @schedule   = args[:schedule]   || Schedule.new
 
     post_initialize(args)
-  end
-
-  def schedulable?(start_date, end_date)
-    !scheduled?(start_date - lead_days, end_date)
-  end
-
-  def scheduled?(start_date, end_date)
-    schedule.scheduled?(self, start_date, end_date)
   end
 
   def lead_days
@@ -48,8 +41,20 @@ class Bicycle
       tire_size:  tire_size
     }.merge(local_spares)
   end
+end
 
+class Vehicle
+  include Schedulable
+  def lead_days
+    3
+  end
+end
 
+class Mechanic
+  include Schedulable
+  def lead_days
+    4
+  end
 end
 
 class RoadBike < Bicycle
@@ -112,6 +117,11 @@ b = Bicycle.new
 p b.inspect
 p b.schedulable?(starting, ending)
 
+v = Vehicle.new
+p v.schedulable?(starting, ending)
+
+m = Mechanic.new
+p m.schedulable?(starting, ending)
 
 # bent = RecumbentBike.new(flag: 'tall and orange')
 #
